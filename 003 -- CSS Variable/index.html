@@ -37,6 +37,22 @@
     <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500" />
 
     <style>
+      :root {
+        --base: #ffc600;
+        --blur: 10px;
+        --spacing: 10px;
+      }
+
+      img {
+        padding: var(--spacing);
+        background: var(--base);
+        filter: blur(var(--blur));
+      }
+
+      .hl {
+        color: var(--base);
+      }
+
       /*
       misc styles, nothing to do with CSS variables
     */
@@ -59,6 +75,18 @@
       }
     </style>
 
-    <script></script>
+    <script>
+      let input = document.querySelectorAll(".controls input");
+
+      function updated() {
+        let suffix = this.dataset.sizing || "";
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + suffix
+        );
+      }
+
+      input.forEach(input => input.addEventListener("change", updated));
+    </script>
   </body>
 </html>
