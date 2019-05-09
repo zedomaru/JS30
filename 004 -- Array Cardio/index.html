@@ -73,20 +73,67 @@
 
       // Array.prototype.filter()
       // 1. Filter the list of inventors for those who were born in the 1500's
+      function filtering() {
+        let result = inventors.filter(
+          element => element.year > 1500 && element.year < 1600
+        );
+        console.table(result);
+      }
+      filtering();
 
       // Array.prototype.map()
       // 2. Give us an array of the inventors' first and last names
+      function mapping() {
+        inventors.map(element => {
+          console.log(`${element.first} ${element.last}`);
+        });
+      }
+      mapping();
 
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
+      function sorting() {
+        let data = inventors.sort(function(a, b) {
+          if (a.year > b.year) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+        console.log(data);
+      }
+      sorting();
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live?
+      function reducing() {
+        inventors.map(element => {
+          let reducer = (death, birth) => element.passed - element.year;
+          let data = inventors.reduce(reducer);
+          console.log(data);
+        });
+      }
+      reducing();
 
       // 5. Sort the inventors by years lived
+      let oldest = inventors.sort(function(a, b) {
+        let lastGuy = a.passed - a.year;
+        let nextGuy = b.passed - b.year;
+        if (lastGuy < nextGuy) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      console.log(oldest);
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+      const category = document.querySelector(".mw-category");
+      const links = Array.from(category.querySelectorAll("a"));
+      const de = links
+        .map(link => link.textContent)
+        .filter(result => result.includes("de"));
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
