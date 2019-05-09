@@ -129,14 +129,25 @@
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-      const category = document.querySelector(".mw-category");
-      const links = Array.from(category.querySelectorAll("a"));
-      const de = links
-        .map(link => link.textContent)
-        .filter(result => result.includes("de"));
+      //   const category = document.querySelector(".mw-category");
+      //   const links = Array.from(category.querySelectorAll("a"));
+      //   const de = links
+      //     .map(link => link.textContent)
+      //     .filter(result => result.includes("de"));
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
+
+      const peopleSort = people.sort(function(lastOne, nextOne) {
+        let [aLast, aFirst] = lastOne.split(", ");
+        let [bLast, bFirst] = nextOne.split(", ");
+        if (aLast > bLast) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      console.log(peopleSort);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -156,6 +167,17 @@
         "car",
         "truck"
       ];
+
+      let transportation = data.reduce(function(obj, item) {
+        // console.log("obj ", obj);
+        // console.log("item ", item);
+        if (!obj[item]) {
+          obj[item] = 0;
+        }
+        obj[item]++;
+        return obj;
+      }, {});
+      console.log(transportation);
     </script>
   </body>
 </html>
